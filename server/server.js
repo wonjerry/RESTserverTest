@@ -1,12 +1,17 @@
 var express = require('express');
-var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var app = express();
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost:27017/test2');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
+
+
+
 // 어떤 디렉토리가 들어오든 이걸 하는 것 같다
 // 글로벌 로직을 위한 것, 모든 요청의 전체리에 필요한 일을 하는 것 같다
 app.all('/*', function(req, res, next) {
@@ -29,14 +34,14 @@ app.all('/*', function(req, res, next) {
 app.all('/api/v1/*', [require('./middlewares/validateRequest')]);
 
 app.use('/', require('./routes'));
-/*
+
 // If no route is matched by now, it must be a 404
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
-*/
+
 // Start the server
 app.set('port', process.env.PORT || 3000);
 
