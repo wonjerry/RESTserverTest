@@ -73,9 +73,10 @@ var auth = {
     },
 
     login : function (req, res) {
+
         var username = req.body.email || '';
         var password = req.body.password || '';
-
+        console.log(username);
         if (username == '' || password == '') {
             res.status(401);
             res.json({
@@ -103,10 +104,12 @@ var auth = {
                 });
 
             }else if (user.email == username && user.password == password) {
+                var data = genToken(user);
                 res.json({
                     "status": 'true',
                     "message": 'validate user',
-                    "token": genToken(user)
+                    "token": data.token,
+                    "userEmail": data.user.email
                 });
             } else {
                 res.json({
@@ -120,7 +123,7 @@ var auth = {
     },
 
     getAllUserList : function (req, res) {
-        var result = [];
+        
         User.find({},function(error, users){
 
             if(error){

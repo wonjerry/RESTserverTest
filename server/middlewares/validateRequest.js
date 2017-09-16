@@ -38,7 +38,7 @@ module.exports = function (req, res, next) {
                         "message": "user doesn't exist"
                     });
                 }else if(user.email === key){
-                    if ((req.url.indexOf('admin') >= 0 && user.userRole == 'admin') || (req.url.indexOf('admin') < 0 && req.url.indexOf('/api/v1/') >= 0)) {
+                    if ((req.url.indexOf('admin') >= 0 && user.userRole == 'admin') || (req.url.indexOf('admin') < 0 && req.url.indexOf('/Rellat/api/v1/') >= 0)) {
                         next(); // To move to next middleware
                     } else {
                         res.status(403);
