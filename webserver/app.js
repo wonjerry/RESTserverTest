@@ -20,8 +20,8 @@ app.use(cors()) // 브라우져에서 ajax 호출 허용. blank일때 어떤 도
 // Only the requests that start with /api/v1/* will be checked for the token.
 // Any URL's that do not follow the below pattern should be avoided unless you
 // are sure that authentication is not needed
-app.all('/Rellat/api/v1/*', [require('./middlewares/validateRequest')])
-app.all('/Rellat/*', require('./routes'))
+app.all('/api/v1/*', [require('./middlewares/validateRequest')])
+app.all('/*', require('./routes'))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
