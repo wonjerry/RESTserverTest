@@ -11,18 +11,18 @@
 <body>
 <div class="login-page">
     <div class="form">
-        <form id="register-form">
-            <input type="text" placeholder="name"/>
-            <input type="password" placeholder="password"/>
-            <input type="text" placeholder="email address"/>
-            <button>create</button>
+        <form name="registerForm" id="register-form">
+            <input type="text" name="username" placeholder="name"/>
+            <input type="password" name="password" placeholder="password"/>
+            <input type="email" name="identifier" placeholder="email address"/>
+            <input type="submit" name="submit" value="create"/>
             <p class="message">Already registered? <a href="#" id="go-login">Sign In</a></p>
         </form>
 
-        <form id="login-form">
-            <input type="text" placeholder="username"/>
-            <input type="password" placeholder="password"/>
-            <button>login</button>
+        <form name="loginForm" id="login-form">
+            <input type="email" placeholder="user email" autocomplete="username" name="identifier" id="identifierId"/>
+            <input type="password" placeholder="password" autocomplete="password" name="password" id="passwordId"/>
+            <input type="submit" name="submit" value="login"/>
             <p class="message">Not registered? <a href="#" id="go-register">Create an account</a></p>
         </form>
     </div>
