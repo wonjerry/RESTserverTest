@@ -26,6 +26,7 @@ function authenticate (socket, data, callback) {
     return callback(null, user.email === decoded.email)
   })
 }
+
 // postAuthenticate: a function to be called after the client is authenticated. It's useful to keep track of the user associated with a client socket:
 function postAuthenticate (socket, data) {
   var decoded = jwt.decode(data.token, require('../config/secret.js')())
@@ -37,6 +38,7 @@ function postAuthenticate (socket, data) {
     socket.client.profile = decoded
   })
 }
+
 // disconnect: a function to be called after the client is disconnected.
 function disconnect (socket) {
   console.log(socket.id + ' disconnected')

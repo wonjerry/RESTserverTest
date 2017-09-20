@@ -3,9 +3,9 @@ var EventEmitter = require('events').EventEmitter
 var inherits = require('inherits')
 
 /**
-* ChatRoom
-* @event userleave 유저가 방을 나가는 액션을 할 때 호출. socket disconnect할 땐 반대로 roomManager에서 메소드를 호출한다.
-*/
+ * ChatRoom
+ * @event userleave 유저가 방을 나가는 액션을 할 때 호출. socket disconnect할 땐 반대로 roomManager에서 메소드를 호출한다.
+ */
 inherits(ChatRoom, EventEmitter)
 
 function ChatRoom (options) {
@@ -21,19 +21,20 @@ function ChatRoom (options) {
   self.players = {}
   self.gameInterval = null
   self.prevTick = 0
-  self.ChangeGameState = function(state) {
+  self.ChangeGameState = function (state) {
     self.gameState = state
     self.prevTick = Date.now()
     self.makeRespnse()
   }
 }
-ChatRoom.prototype.initGame = function() {
+
+ChatRoom.prototype.initGame = function () {
   var self = this
   self.initDecks()
-  self.pushClient({ id: Util.DEALER, is_dealer: true })
+  self.pushClient({id: Util.DEALER, is_dealer: true})
   self.ChangeGameState(Util.GAMESTATES.READY)
 
-  function gameLoop() {
+  function gameLoop () {
     var self = this
     if (self.gameState == Util.GAMESTATES.READY) {
       if (1000 * 1 < (Date.now() - self.prevTick)) {
@@ -209,7 +210,7 @@ ChatRoom.prototype.initGame = function() {
   self.gameInterval = setInterval(gameLoop.bind(self), 1000 * 0.5)
 }
 
-ChatRoom.prototype.pushClient = function(options) {
+ChatRoom.prototype.pushClient = function (options) {
   var self = this
   var player = new Player(options)
   self.players[options.id || Util.DEALER] = player
@@ -217,15 +218,15 @@ ChatRoom.prototype.pushClient = function(options) {
 }
 
 /**
-* clientEventHandler
-*
-* @param {*} message {
+ * clientEventHandler
+ *
+ * @param {*} message {
 *  client_id: String
 *  room_id: String
 *  action: String - > Deal, Drop, Hit, Stand, Double, Split, Surrender, Insurance
 *  bet: Number
 * }
-* @event {*} response {
+ * @event {*} response {
 *  client_id: String
 *  room_id: String
 *  gameState: String
@@ -234,8 +235,8 @@ ChatRoom.prototype.pushClient = function(options) {
 *  getActions: Array Get possible action for current state
 *  otherPlayers: Array See other player's cards
 * }
-*/
-ChatRoom.prototype.clientEventHandler = function(message) {
+ */
+ChatRoom.prototype.clientEventHandler = function (message) {
   var self = this
   var player = self.players[message.client_id]
   // client id -> action
@@ -263,7 +264,7 @@ ChatRoom.prototype.clientEventHandler = function(message) {
     debug('ignore client action: ' + JSON.stringify(message))
   }
 }
-ChatRoom.prototype.makeRespnse = function(target) {
+ChatRoom.prototype.makeRespnse = function (target) {
   var self = this
   var broadcast = false
   if (!target) {
@@ -299,7 +300,7 @@ ChatRoom.prototype.makeRespnse = function(target) {
   })
 }
 
-ChatRoom.prototype.updateDisconectedUser = function(client_id) {
+ChatRoom.prototype.updateDisconectedUser = function (client_id) {
   var self = this
   if (self.players[client_id]) delete self.players[client_id]
   debug('client: ' + client_id + ' disconnect from room: ' + self.room_id)

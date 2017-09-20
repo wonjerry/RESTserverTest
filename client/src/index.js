@@ -49,10 +49,10 @@ function submitLogin (email, password, callback) {
     method: 'POST',
     url: 'http://localhost:3000/user/login',
     headers:
-    {
-      'cache-control': 'no-cache',
-      'content-type': 'application/json'
-    },
+      {
+        'cache-control': 'no-cache',
+        'content-type': 'application/json'
+      },
     body: {email: email, password: password},
     json: true
   }, function (error, response, body) {
@@ -74,10 +74,10 @@ function submitRegister (name, email, password, callback) {
     method: 'POST',
     url: 'http://localhost:3000/user/registerUser',
     headers:
-    {
-      'cache-control': 'no-cache',
-      'content-type': 'application/json'
-    },
+      {
+        'cache-control': 'no-cache',
+        'content-type': 'application/json'
+      },
     body: {email: email, password: password, name: name},
     json: true
   }, function (error, response, body) {
@@ -90,12 +90,12 @@ var options = {
   method: 'GET',
   url: 'http://localhost:3000/api/v1/admin/users',
   headers:
-  {
-    'cache-control': 'no-cache',
-    'content-type': 'application/json',
-    'x-key': 'dldnjswo19@gmail.com',
-    'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDU3MjcyNTMxMTN9.5yN4JA2IdaaMV0YtD1Cazu76CfoLiyye8KeRYJLri2I'
-  },
+    {
+      'cache-control': 'no-cache',
+      'content-type': 'application/json',
+      'x-key': 'dldnjswo19@gmail.com',
+      'x-access-token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDU3MjcyNTMxMTN9.5yN4JA2IdaaMV0YtD1Cazu76CfoLiyye8KeRYJLri2I'
+    },
   json: true
 }
 

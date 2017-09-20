@@ -23,7 +23,7 @@ RoomManager.prototype.requestGameRoom = function (socket) {
       if (gameroom.players.length > MAX_CLIENT) continue
 
       socket.join(key)
-      gameroom.pushClient({ id: socket.id, money_on_hand: 100 })
+      gameroom.pushClient({id: socket.id, money_on_hand: 100})
       hasJoined = true
     }
   }
@@ -41,9 +41,9 @@ RoomManager.prototype.requestGameRoom = function (socket) {
 RoomManager.prototype.createGameRoom = function (socket) {
   var self = this
 
-  var gameroom = new Game({ room_id: Math.random().toString(36).substr(2), num_of_decks: 1 })
+  var gameroom = new Game({room_id: Math.random().toString(36).substr(2), num_of_decks: 1})
   gameroom.initGame()
-  gameroom.pushClient({ id: socket.id, money_on_hand: 100 })
+  gameroom.pushClient({id: socket.id, money_on_hand: 100})
   socket.join(gameroom.room_id)
   gameroom.on('userleave', self.leaveGameRoom.bind(self))
   gameroom.on('response', self.roomResponse.bind(self))
