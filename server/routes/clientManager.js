@@ -99,14 +99,14 @@ var auth = {
 
             if(!user){
                 res.json({
-                    "status": 'false',
+                    "status": false,
                     "message": "user dosen't exist"
                 });
 
             }else if (user.email == username && user.password == password) {
                 var data = genToken(user);
                 res.json({
-                    "status": 'true',
+                    "status": 200,
                     "message": 'validate user',
                     "token": data.token,
                     "userEmail": data.user.email
@@ -123,7 +123,7 @@ var auth = {
     },
 
     getAllUserList : function (req, res) {
-        
+
         User.find({},function(error, users){
 
             if(error){
